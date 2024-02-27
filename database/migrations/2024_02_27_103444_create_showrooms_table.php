@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->integer('capacity');
+            $table->foreignId(column: 'city_id')->constrained(table: 'cities')->nullable();
+            $table->foreignId(column: 'country_id')->constrained(table: 'countries')->nullable();
             $table->timestamps();
         });
     }

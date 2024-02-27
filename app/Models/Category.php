@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    public function category() { // association N/N avec table article_tag
+        return $this->belongsToMany(Tag::class, 'events_categories', 'category_id', 'event_id');
+    }
 }
