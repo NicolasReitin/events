@@ -9,15 +9,14 @@ class Artist extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = ['name'];
 
-    public function eventArtist() { // association N/N avec table article_tag
-        return $this->belongsToMany(Tag::class, 'events_artists', 'artist_id', 'event_id');
+
+    public function events() { // association N/N avec table article_tag
+        return $this->belongsToMany(Event::class, 'events_artists');
     }
 
-    // public function event() { // association 1/N avec la table users
-    //     return $this->belongsTo(User::class, 'user_id');
-    // }
+
 
 
 }

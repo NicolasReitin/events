@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\event;
+use App\Models\Event;
+use App\Models\Showroom;
 use App\Http\Requests\StoreeventRequest;
 use App\Http\Requests\UpdateeventRequest;
+use Inertia\Inertia;
 
 class EventController extends Controller
 {
@@ -13,7 +15,10 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::query()
+        ->with(['artists', 'showroom'])->get();
+        // dd($events);
+        return Inertia::render('event/Index', ['events' => $events]);
     }
 
     /**
@@ -37,7 +42,16 @@ class EventController extends Controller
      */
     public function show(event $event)
     {
-        //
+        // dd($event);
+        $showroom = Showroom::query()
+            ->where('id', '=', $event->id)
+            ->get();
+
+        //$artists = $event->artists()->get();
+        $event->load('artists');
+            // dd($showroom->first()->name);
+            
+        return Inertia::render('event/Show', ['event' => $event, 'showroom' => $showroom]);
     }
 
     /**
