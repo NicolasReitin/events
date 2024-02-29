@@ -1,6 +1,7 @@
 import React from 'react'
+import { router } from '@inertiajs/react'
 
-export default function FormValidate() {
+export default function FormValidate( {eventId}) {
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -9,7 +10,7 @@ export default function FormValidate() {
         
         const firstName = formData.get('firstName');
         const lastName = formData.get('lastName');
-        const mail = formData.get('mail');
+        const email = formData.get('email');
         const adress = formData.get('adress');
         const postalCode = formData.get('postalCode');
         const city = formData.get('city');
@@ -17,13 +18,19 @@ export default function FormValidate() {
         const cardNumber = formData.get('cardNumber');
         const validityDate = formData.get('validityDate');
         const cryptogram = formData.get('cryptogram');
-        console.log(formData);
+        // console.log(formData);
+
+        const url = route('event.store');
+        // console.log(url);
+    
+    
+        router.post(url, formData);
 
 
     }
 
   return (
-    <form onSubmit={handleSubmit} className='mt-5' action='' method='GET'>
+    <form onSubmit={handleSubmit} className='mt-5' method='post'>
         <div className='flex justify-center gap-10 flex-wrap'>
             <div>
                 <div className='flex flex-col w-80'>
@@ -35,8 +42,8 @@ export default function FormValidate() {
                     <input type="text" id='lastName' name="lastName" />
                 </div>
                 <div className='flex flex-col w-80'>
-                    <label htmlFor="mail">Mail</label>
-                    <input type="text" id='mail' name="mail" />
+                    <label htmlFor="email">Mail</label>
+                    <input type="text" id='mail' name="email" />
                 </div>
                 <div className='flex flex-col w-80'>
                     <label htmlFor="adress">Adresse</label>
@@ -49,6 +56,9 @@ export default function FormValidate() {
                 <div className='flex flex-col w-80'>
                     <label htmlFor="city">Ville</label>
                     <input type="text" id='city' name="city" />
+                </div>
+                <div>
+                    <input hidden type="text" name="eventId" value={eventId} />
                 </div>
             </div>
             <div>

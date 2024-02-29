@@ -35,7 +35,9 @@ export default function book( {auth, event} ) {
         <div className='ml-10 mr-10 mt-10'>
             <h2 className='text-center text-xl'><strong>Information pour la réservation</strong></h2>
 
-            <FormValidate />
+            <FormValidate 
+            eventId = {event.id}
+            />
             
         </div>
     </>
