@@ -1,5 +1,5 @@
-import { Link } from '@inertiajs/react';
 import React from 'react'
+import ButtonLink from './ButtonLink';
 
 export default function Card( {event} ) {
 
@@ -9,8 +9,7 @@ export default function Card( {event} ) {
                 {artist.name}
             </a>
         </>
-    }
-) 
+    }) 
 
 //conversion heure format
     function formatDateTime(dateTimeString) {
@@ -33,11 +32,11 @@ export default function Card( {event} ) {
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong className='text-gray-300'>Date de fin :</strong> {formatDateTime(event.date_end)}</p>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong className='text-gray-300'>Capacité totale :</strong> {event.showroom.capacity}</p>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong className='text-gray-300'>Places restantes :</strong> {event.showroom.capacity - event.booking_number}</p>
-        <Link
-        href={route('event.show', event.id )}
-        className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
-            Read more
-        </Link>
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong className='text-gray-300'>A partir de : </strong> {event.price} €</p>
+        
+        <ButtonLink 
+            hrefLink = {route('event.show', event.id )}
+        />
     </div>
   )
 }

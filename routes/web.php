@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Event;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,16 +28,20 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $events = Event::query()
+        ->with(['artists', 'showroom'])->get();
+
+    return Inertia::render('Dashboard', [
+        'events' => $events
+        
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::get('/events', function () {
-//     return Inertia::render('event/Index');
-// })->middleware(['auth', 'verified'])->name('event.index');
 
 
 Route::get('/events', [EventController::class, 'index'])->name('event.index');
 Route::get('/event/{event}', [EventController::class, 'show'])->name('event.show');
+Route::get('/event/book/{event}', [EventController::class, 'book'])->name('event.book');
 
 
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->dateTime('date_start');
             $table->dateTime('date_end');
             $table->integer('booking_number');
+            $table->integer('price')->nullable();
             $table->foreignId(column: 'showroom_id')->constrained(table: 'showrooms')->nullable();
             $table->timestamps();
         });

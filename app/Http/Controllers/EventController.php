@@ -10,6 +10,10 @@ use Inertia\Inertia;
 
 class EventController extends Controller
 {
+    public function book(event $event)
+    {
+        
+    }
     /**
      * Display a listing of the resource.
      */
@@ -47,9 +51,9 @@ class EventController extends Controller
             ->where('id', '=', $event->id)
             ->get();
 
-        //$artists = $event->artists()->get();
         $event->load('artists');
-            // dd($showroom->first()->name);
+        $event->load('showroom');
+        // dd($event);
             
         return Inertia::render('event/Show', ['event' => $event, 'showroom' => $showroom]);
     }
@@ -77,4 +81,5 @@ class EventController extends Controller
     {
         //
     }
+
 }

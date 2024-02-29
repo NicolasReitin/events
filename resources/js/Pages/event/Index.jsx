@@ -16,7 +16,8 @@ function events( {auth, events} ) {
 
             <div>
                 <h2 className='text-center text-5xl mt-5'>Liste des événements :</h2>
-                <div className='flex gap-10 mt-5 '>
+                
+                <div className='flex flex-wrap  gap-10 mt-5 ml-10'>
                     {events.map((event) => (
                         <>
                             <Card
