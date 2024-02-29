@@ -10,10 +10,6 @@ use Inertia\Inertia;
 
 class EventController extends Controller
 {
-    public function book(event $event)
-    {
-        
-    }
     /**
      * Display a listing of the resource.
      */
@@ -24,7 +20,15 @@ class EventController extends Controller
         // dd($events);
         return Inertia::render('event/Index', ['events' => $events]);
     }
-
+    
+    public function book(event $event)
+    {
+        $event->load('artists');
+        $event->load('showroom');
+        
+        return Inertia::render('event/Book', ['event' => $event]);
+    }
+    
     /**
      * Show the form for creating a new resource.
      */
@@ -47,15 +51,10 @@ class EventController extends Controller
     public function show(event $event)
     {
         // dd($event);
-        $showroom = Showroom::query()
-            ->where('id', '=', $event->id)
-            ->get();
-
         $event->load('artists');
         $event->load('showroom');
-        // dd($event);
             
-        return Inertia::render('event/Show', ['event' => $event, 'showroom' => $showroom]);
+        return Inertia::render('event/Show', ['event' => $event]);
     }
 
     /**
