@@ -35,27 +35,23 @@ Route::get('/dashboard', function () {
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
-
+//-----------------------------Event-------------------------
 Route::get('/events', [EventController::class, 'index'])->name('event.index');
 Route::get('/event/{event}', [EventController::class, 'show'])->name('event.show');
-Route::get('/event/book/{event}', [EventController::class, 'book'])->name('event.book');
+Route::get('/event/create/{event}', [EventController::class, 'create'])->name('event.create');
 Route::post('/event/store', [EventController::class, 'store'])->name('event.store');
-
-
 Route::get('/event/booking/success/{eventId}', function ($eventId) {
     $event = Event::with('artists', 'showroom')
     ->find($eventId);
     return Inertia::render('event/Success', ['event' => $event]);
 })->name('event.success');
-
-
 Route::get('/event/booking/error/{eventId}', function ($eventId) {
     $event = Event::with('artists', 'showroom')
     ->find($eventId);
     return Inertia::render('event/Error', ['event' => $event]);
 }) ->name('event.error');
 
+//-----------------------------Profile-------------------------
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -25,7 +25,7 @@ export default function CardShow( {event, isButtonHidden } ) {
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong className='text-gray-300'>Places restantes :</strong> {event.showroom.capacity - event.booking_number}</p>
                 <p className="mb-3 font-normal text-gray-700 dark:text-gray-400"><strong className='text-gray-300'>A partir de : </strong> {event.price} €</p>
                 <ButtonLink
-                hrefLink = {route('event.book', event.id)}
+                hrefLink = {route('event.create', event.id)}
                 />
             </div>
         </div>

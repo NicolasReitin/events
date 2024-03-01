@@ -5,7 +5,7 @@ import FormValidate from '@/Components/FormValidate';
 import CardShow from '@/Components/CardShow';
 
 
-export default function book( {auth, event} ) {
+export default function create( {auth, event} ) {
 
     const artistsName =  event.artists.map((artist) => {
         return <>
@@ -14,8 +14,7 @@ export default function book( {auth, event} ) {
             </a>
         </>
       }) 
-
-
+      
   return (
     <>
         <AuthenticatedLayout

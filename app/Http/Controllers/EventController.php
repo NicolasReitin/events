@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreeventRequest;
 use App\Http\Requests\UpdateeventRequest;
+use DateTime;
 
 class EventController extends Controller
 {
@@ -24,20 +25,12 @@ class EventController extends Controller
         return Inertia::render('event/Index', ['events' => $events]);
     }
     
-    public function book(event $event)
+    public function create(event $event)
     {
         $event->load('artists');
         $event->load('showroom');
         
-        return Inertia::render('event/Book', ['event' => $event]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return Inertia::render('event/Create', ['event' => $event]);
     }
 
     /**
@@ -45,6 +38,7 @@ class EventController extends Controller
      */
     public function store(StoreeventRequest $request)
     {
+        // dd($request);
         $firstName = $request->input('firstName');
         $lastName = $request->input('lastName');
         $email = $request->input('email');
@@ -54,7 +48,7 @@ class EventController extends Controller
         // dd($firstName);
 
         $eventId = $request->input('eventId'); // recup de l'id de l'event dans le form en hidden
-      
+
         //recup de l'objet event
         $event = Event::query()
                 ->with(['artists', 'showroom'])
