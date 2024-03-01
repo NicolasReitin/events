@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Head } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Card from '@/Components/Card';
+import Search from '@/Components/Search';
 
 function events( {auth, events} ) {
+
+    const [searchBar, setSearchBar] = useState('');
+
+      // Filtrer les cartes en fonction du terme de recherche
+  const filteredEvents = events.filter(event => {
+    // Vérifier si le terme de recherche est inclus dans le titre de l'événement
+    return event.artists[0].name.toLowerCase().includes(searchBar.toLowerCase());
+    // Vous pouvez étendre cette logique pour inclure d'autres propriétés d'événements
+  });
+
     return (
         <>
             <AuthenticatedLayout
@@ -14,11 +25,15 @@ function events( {auth, events} ) {
 
             </AuthenticatedLayout>
 
+            <Search 
+            setSearchBar={setSearchBar}
+            />
+
             <div>
                 <h2 className='text-center text-5xl mt-5'>Liste des événements :</h2>
                 
                 <div className='flex flex-wrap  gap-10 mt-5 ml-10'>
-                    {events.map((event) => (
+                    {filteredEvents.map((event) => (
                         <>
                             <Card
                             key = {event.id}
