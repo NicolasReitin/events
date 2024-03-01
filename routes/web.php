@@ -49,6 +49,7 @@ Route::get('/event/booking/success/{eventId}', function ($eventId) {
     return Inertia::render('event/Success', ['event' => $event]);
 })->name('event.success');
 
+
 Route::get('/event/booking/error/{eventId}', function ($eventId) {
     $event = Event::with('artists', 'showroom')
     ->find($eventId);
