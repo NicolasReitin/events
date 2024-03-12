@@ -10,8 +10,9 @@ function events( {auth, events} ) {
 
       // Filtrer les cartes en fonction du terme de recherche
   const filteredEvents = events.filter(event => {
-    // Vérifier si le terme de recherche est inclus dans le titre de l'événement
-    return event.artists[0].name.toLowerCase().includes(searchBar.toLowerCase());
+    // Vérifier si le terme de recherche est inclus dans le name de l'artist ou le name de la salle
+    return event.artists[0].name.toLowerCase().includes(searchBar) ||
+            event.showroom.name.toLowerCase().includes(searchBar)   
     // Vous pouvez étendre cette logique pour inclure d'autres propriétés d'événements
   });
 
